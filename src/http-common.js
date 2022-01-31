@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default axios.create({
-  baseURL: "https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb",
+  baseURL: 'https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb',
   headers: {
-    "Content-type": "application/json"
-  }
+    'Content-type': 'application/json',
+  },
 });
