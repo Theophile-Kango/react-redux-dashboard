@@ -1,10 +1,11 @@
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Dashboard } from './component/Dashboard';
 
 function App() {
   return (
     <>
-      <h1>Dasboard</h1>
+      <Dashboard />
     </>
   );
 }
