@@ -5,7 +5,7 @@ import {
   DELETE_USER,
 } from './types';
 
-import UserDataService from '../services/user.service';
+import UserDataService from '../services/userService';
 
 export const createUser = (name, email) => async (dispatch) => {
   try {
@@ -31,7 +31,7 @@ export const retrieveUsers = () => async (dispatch) => {
     });
     return Promise.resolve(res.data);
   } catch (err) {
-    return err;
+    return Promise.reject(err);
   }
 };
 
@@ -59,6 +59,6 @@ export const deleteUser = (id) => async (dispatch) => {
     });
     return false;
   } catch (err) {
-    return err;
+    Promise.reject(err);
   }
 };
