@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { retrieveUsers } from '../actions/users';
+import { Link } from 'react-router-dom';
+import { deleteUser, retrieveUsers } from '../actions/users';
 
 const Table = () => {
   const users = useSelector((state) => state.users);
@@ -10,11 +11,21 @@ const Table = () => {
     dispatch(retrieveUsers());
   }, []);
 
+  const removeUser = () => {
+    dispatch(deleteUser(currentUser.id))
+      .then(() => {
+        props.history.push("/dashboard");
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
   return (
     <div className="p-2 table-responsive border border-secondary">
         <div className="d-flex justify-content-between m-3">
             <h3>User list</h3>
-            <a className="btn btn-primary" href="/new-user">Add new</a>
+            <Link className="btn btn-primary" to="/new-user">Add new</Link>
         </div>
 
         <table className="table border">
@@ -37,7 +48,7 @@ const Table = () => {
                         <td>{user.username}</td>
                         <td>{user.email}</td>
                         <td>{user.address.city}</td>
-                        <td className="text-center"><button className="btn btn-warning">Edit</button></td>
+                        <td className="text-center"><Link to={`/edit-user/${user.id}`} className="btn btn-warning">Edit</Link></td>
                         <td className="text-center"><button className="btn btn-danger">Delete</button></td>
                     </tr>
                 ))}

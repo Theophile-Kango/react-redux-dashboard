@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { createUser } from "../actions/users";
+import { useHistory } from "react-router-dom";
 
 const NewUser = () => {
     const initialTutorialState = {
@@ -9,7 +11,7 @@ const NewUser = () => {
     };
 
     const [user, setUser] = useState(initialTutorialState);
-    const [submitted, setSubmitted] = useState(false);
+    let history = useHistory();
 
     const dispatch = useDispatch();
 
@@ -22,24 +24,22 @@ const NewUser = () => {
         const { name, email } = user;
     
         dispatch(createUser(name, email))
-          .then(data => {
+            .then(data => {
             setUser({
-              name: data.name,
-              email: data.email
+                name: data.name,
+                email: data.email
+            }).then(() => {
+                    history.push("/dashboard");
             });
             setSubmitted(true);
     
             console.log(data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
+            })
+            .catch(e => {
+                console.log(e);
+        });
     };
 
-    const newUser = () => {
-        setUser(initialTutorialState);
-        setSubmitted(false);
-    };
     
 
   return (
@@ -75,7 +75,7 @@ const NewUser = () => {
                         />
                     </div>
                     <div className="d-flex justify-content-end mt-3">
-                        <a type="cancel" className="btn btn-secondary" style={{marginRight: "20px"}} href="/">cancel</a>
+                        <Link type="cancel" className="btn btn-secondary" style={{marginRight: "20px"}} to="/">cancel</Link>
                         <button type="submit" className="btn btn-primary" onClick={saveUser} >Submit</button>
                     </div>
                 </form>
