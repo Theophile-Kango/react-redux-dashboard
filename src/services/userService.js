@@ -8,9 +8,14 @@ const update = (id, data) => http.put(`/data/${id}`, data);
 
 const remove = (id) => http.delete(`/data/${id}`);
 
+const get = id => {
+  return http.get(`/data/${id}`);
+};
+
 export default {
   getAll,
   create,
   update,
   remove,
+  get
 };

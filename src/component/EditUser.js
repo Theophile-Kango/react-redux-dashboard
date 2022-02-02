@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../actions/users";
 import UserDataService from "../services/userService";
+import { useHistory } from "react-router-dom";
 
-const EditUser = () => {
+const EditUser = (props) => {
     const initialTutorialState = {
         name: "",
         email: ""
     };
+
+    const [currentUser, setCurrentUser] = useState(initialTutorialState);
+    let history = useHistory();
 
     const dispatch = useDispatch();
 
@@ -28,27 +32,19 @@ const EditUser = () => {
 
     const handleInputChange = event => {
         const { name, value } = event.target;
-        setUser({ ...user, [name]: value });
+        setCurrentUser({ ...currentUser, [name]: value });
     };
 
-    const updateStatus = status => {
-        const data = {
-          name: currentUser.name,
-          email: currentUser.email,
-        };
-    
-        dispatch(updateUser(currentUser.id, data))
-          .then(data => {
-            setUser({...currentUser});
-          })
-          .catch(e => {
-            console.log(e);
-          });
-    };
-
-    const newUser = () => {
-        setUser(initialTutorialState);
-        setSubmitted(false);
+    const updateContent = (e) => {
+      e.preventDefault();
+      dispatch(updateUser(currentUser.id, currentUser))
+        .then(response => {
+          console.log(response);
+          history.push("/dashboard");
+        })
+        .catch(e => {
+          console.log(e);
+        });
     };
     
 
@@ -67,7 +63,7 @@ const EditUser = () => {
                             className="form-control w-75" 
                             required={true} 
                             id="inputName" 
-                            value={user.name}
+                            value={currentUser.name}
                             name="name"
                             onChange={handleInputChange}
                         />
@@ -80,13 +76,13 @@ const EditUser = () => {
                             required={true} 
                             id="inputEmail" 
                             name="email"
-                            value={user.email}
+                            value={currentUser.email}
                             onChange={handleInputChange}
                         />
                     </div>
                     <div className="d-flex justify-content-end mt-3">
                         <a type="cancel" className="btn btn-secondary" style={{marginRight: "20px"}} href="/">cancel</a>
-                        <button type="submit" className="btn btn-primary" onClick={saveUser} >Submit</button>
+                        <button type="submit" className="btn btn-primary" onClick={updateContent} >Submit</button>
                     </div>
                 </form>
             </div>

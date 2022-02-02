@@ -47,7 +47,7 @@ const Table = () => {
                         <td>{user.name}</td>
                         <td>{user.username}</td>
                         <td>{user.email}</td>
-                        <td>{user.address.city}</td>
+                        <td>{user.address && user.address.city}</td>
                         <td className="text-center"><Link to={`/edit-user/${user.id}`} className="btn btn-warning">Edit</Link></td>
                         <td className="text-center"><button className="btn btn-danger">Delete</button></td>
                     </tr>

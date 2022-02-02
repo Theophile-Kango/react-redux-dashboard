@@ -20,7 +20,8 @@ const NewUser = () => {
         setUser({ ...user, [name]: value });
     };
 
-    const saveUser = () => {
+    const saveUser = (e) => {
+        e.preventDefault();
         const { name, email } = user;
     
         dispatch(createUser(name, email))
@@ -28,12 +29,8 @@ const NewUser = () => {
             setUser({
                 name: data.name,
                 email: data.email
-            }).then(() => {
-                    history.push("/dashboard");
-            });
-            setSubmitted(true);
-    
-            console.log(data);
+            })
+            history.push("/dashboard");
             })
             .catch(e => {
                 console.log(e);
