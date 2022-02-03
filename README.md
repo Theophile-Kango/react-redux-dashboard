@@ -6,7 +6,7 @@ A simple dashboard built with React/Redux for adding, editing and deleting users
 
 ## Screenshot
 
-![Dashboard](https://user-images.githubusercontent.com/49276315/89875305-65b6c480-dbbd-11ea-9c15-c2db851604b9.png)
+![Dashboard](https://user-images.githubusercontent.com/49276315/152261299-3b7cf3e2-f296-42d2-9ec8-4d1312bff159.png)
 
 ## Live Demo
 
