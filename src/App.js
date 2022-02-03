@@ -1,9 +1,9 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Table from './component/Table';
 import NewUser from './component/NewUser';
-import EditUser from './component/EditUser'
+import EditUser from './component/EditUser';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <div className="container mt-2  border border-secondary pb-2">
         <h1>Dashboard</h1>
         <Switch>
-          <Route exact path={["/", "/dashboard"]} component={Table} />
+          <Route exact path={['/', '/dashboard']} component={Table} />
           <Route path="/new-user" component={NewUser} />
           <Route path="/edit-user/:id" component={EditUser} />
         </Switch>

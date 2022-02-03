@@ -51,14 +51,14 @@ export const updateUser = (id, data) => async (dispatch) => {
 
 export const deleteUser = (id) => async (dispatch) => {
   try {
-    await UserDataService.delete(id);
+    const res = await UserDataService.delete(id);
 
     dispatch({
       type: DELETE_USER,
       payload: { id },
     });
-    return false;
+    return res;
   } catch (err) {
-    Promise.reject(err);
+    return Promise.reject(err);
   }
 };
