@@ -10,6 +10,7 @@ A simple dashboard built with React/Redux for adding, editing and deleting users
 
 ## Live Demo
 
+
 [Click here](https://family-movies-catalogue.netlify.app/)
 
 ## Getting Started
