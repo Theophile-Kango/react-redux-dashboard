@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { updateUser } from '../actions/users';
 import UserDataService from '../services/userService';
 
@@ -9,6 +10,8 @@ const EditUser = (props) => {
     name: '',
     email: '',
   };
+
+  const { match } = props;
 
   const [currentUser, setCurrentUser] = useState(initialTutorialState);
   const history = useHistory();
@@ -27,8 +30,8 @@ const EditUser = (props) => {
   };
 
   useEffect(() => {
-    getUser(props.match.params.id);
-  }, [props.match.params.id]);
+    getUser(match.params.id);
+  }, [match.params.id]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -61,7 +64,7 @@ const EditUser = (props) => {
                 type="text"
                 className="form-control w-75"
                 required
-                id="inputName"
+                id="name"
                 value={currentUser.name}
                 name="name"
                 onChange={handleInputChange}
@@ -88,6 +91,10 @@ const EditUser = (props) => {
       </div>
     </div>
   );
+};
+
+EditUser.propTypes = {
+  match: PropTypes.string.isRequired,
 };
 
 export default EditUser;

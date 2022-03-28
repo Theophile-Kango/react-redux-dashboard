@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteUser, retrieveUsers } from '../actions/users';
+import { retrieveUsers } from '../actions/users';
 
 const Table = () => {
   const users = useSelector((state) => state.users);
@@ -10,16 +10,6 @@ const Table = () => {
   useEffect(() => {
     dispatch(retrieveUsers());
   }, []);
-
-  const removeUser = () => {
-    dispatch(deleteUser(currentUser.id))
-      .then(() => {
-        props.history.push('/dashboard');
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
 
   return (
     <div className="p-2 table-responsive border border-secondary">
@@ -49,7 +39,7 @@ const Table = () => {
               <td>{user.email}</td>
               <td>{user.address && user.address.city}</td>
               <td className="text-center"><Link to={`/edit-user/${user.id}`} className="btn btn-warning">Edit</Link></td>
-              <td className="text-center"><button className="btn btn-danger">Delete</button></td>
+              <td className="text-center"><button type="submit" className="btn btn-danger">Delete</button></td>
             </tr>
           ))}
         </tbody>
